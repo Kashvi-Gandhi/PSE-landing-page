@@ -1,0 +1,1002 @@
+﻿/* ==========================================================================
+   1. DESIGN TOKENS & VARIABLE DECLARATIONS
+   ========================================================================== */
+:root {
+  /* Core Color Palette (Verify / adjust hex shades directly from your Figma inspect panel) */
+  --color-primary: #0a2540;      /* Deep Elegant Navy Blue */
+  --color-accent: #f2a900;       /* High Contrast Premium Gold / Amber */
+  --color-accent-hover: #d49400; /* Darker Gold for interactive state transitions */
+  --color-text-dark: #2d3748;    /* Charcoal Body Text */
+  --color-text-light: #ffffff;   /* Clean White */
+  --color-bg-light: #f7fafc;     /* Light Grey for alternating background tracks */
+  --color-border: #e2e8f0;       /* Split borders and subtle lines */
+
+  /* Global Typography System */
+  --font-primary: 'Poppins', Arial, Helvetica, sans-serif;
+  
+  /* Standard Layout Durations */
+  --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==========================================================================
+   2. GLOBAL ACCESSIBILITY & RESET RULES
+   ========================================================================== */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-primary);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-text-dark);
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-text-light);
+  overflow-x: hidden; /* Prevents unwanted horizontal broken scrolling layout triggers */
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+button, input {
+  font: inherit;
+}
+
+/* Screen Reader / Keyboard Focus Skip Links */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 0;
+  background: var(--color-accent);
+  color: var(--color-primary);
+  padding: 1rem 1.5rem;
+  font-weight: bold;
+  z-index: 9999;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+/* Utility layout class to wrap grid boundaries safely */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Respect System-Level Reduced Motion Preference Guardrail */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-delay: -1ms !important;
+    animation-duration: -1ms !important;
+    animation-iteration-count: 1 !important;
+    background-attachment: initial !important;
+    scroll-behavior: auto !important;
+    transition-duration: -1ms !important;
+    transition-delay: -1ms !important;
+  }
+}
+
+/* ==========================================================================
+   3. HEADER / NAVIGATION COMPONENTS
+   ========================================================================== */
+.header {
+  width: 100%;
+  background-color: var(--color-text-light);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header__container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 80px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.header__logo {
+  height: 45px; /* Adjust scale smoothly to match Figma sizing */
+  width: auto;
+}
+
+.header__cta {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  border: 2px solid #2b1a4a;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: var(--transition-smooth);
+  margin-left: auto;
+}
+
+.header__cta-icon {
+  background-color: #2b1a4a;
+  color: #ffffff;
+  padding: 0.65rem 0.85rem;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header__cta-text {
+  background-color: #ffffff;
+  color: #1a0a3c;
+  padding: 0.65rem 1.25rem;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.header__cta:hover .header__cta-icon {
+  background-color: #1a0a3c;
+}
+
+.header__cta:focus {
+  outline: 2px solid #2b1a4a;
+  outline-offset: 2px;
+}
+
+/* ==========================================================================
+   4. PIXEL-PERFECT HERO COMPONENT (EXACT 4-PART MATHEMATICAL GRID)
+   ========================================================================== */
+.hero {
+  position: relative;
+  background: linear-gradient(110deg, #1a0a3c 0%, #2d0d6b 40%, #4b1a8c 70%, #3d1466 100%);
+  min-height: 620px;
+  height: 560px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  border-top: none;
+  border-bottom: none;
+  padding-top: 0;
+  padding-bottom: 0;
+  outline: none;
+}
+
+/* 4-Part Layout Splitter: 1.5 Columns (Heading) + 1.5 Columns (Gallery) + 1 Column (Form) = 4 Units Total */
+.hero__container {
+  display: grid;
+  grid-template-columns: 1.40fr 1.60fr 1fr;
+  gap: 2rem;
+  width: 100%;
+  max-width: 1440px; /* Slightly wider to easily accommodate the true 4-part split */
+  margin: 0 auto;
+  padding: 0rem 2rem;
+  align-items: center;
+}
+
+/* --- Left Column: Heading Layout (Takes up 1.5 shares) --- */
+.hero__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: var(--font-primary);
+}
+
+.hero__heading {
+  font-size: 2.5rem;
+  font-weight: 500;
+  line-height: 1.15;
+  color: #ffcc66;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.5px;
+}
+
+.hero__heading--highlight {
+  font-size: 3.3rem;;
+  color: #ffcc66; /* Bright golden yellow text layer color */
+}
+
+.hero__subheading {
+  font-size: 1.1rem;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  color: #ffcc66;
+  margin-bottom: 3.5rem;
+}
+
+/* Rounded Information Badge Capsule */
+.hero__capsule {
+  display: flex;
+  align-self: flex-start; /* Keeps the capsule compact without forcing full width stretches */
+  background-color: #f5d493; /* Soft warm gold paste shade from screenshot background */
+  color: #2b004d;
+  padding: 1rem 2rem;
+  border-radius: 100px;
+  gap: 1rem;
+  align-items: center;
+  width:100%;
+
+}
+
+.hero__capsule-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero__capsule-item strong {
+  font-size: 1.25rem;
+  font-weight: 750;
+  align-items: center;
+}
+
+.hero__capsule-item span {
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.hero__capsule-item--venue {
+  position: relative;
+  padding-right: 2rem;
+}
+
+.hero__capsule-item--venue::after {
+  content: '';
+  position: absolute;
+  right: 0;
+  top: 10%;
+  height: 80%;
+  width: 1px;
+  background-color: rgba(43, 0, 77, 0.2);
+}
+
+/* --- Middle Column: Triple Vertical Gallery Engine (Takes up 1.5 shares) --- */
+.hero__gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.85rem;
+  height: 600px; /* Perfectly framed vertical block window height */
+  position: relative;
+}
+
+.hero__gallery-col {
+  height: 100%;
+  overflow: hidden;
+  mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
+}
+
+.hero__gallery-track {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.hero__gallery-track--up {
+  animation: loopScrollUp 10s linear infinite;
+  animation-delay: 0s;
+}
+
+.hero__gallery-track--down {
+  animation: loopScrollDown 10s linear infinite;
+  animation-delay: -7s;
+}
+
+/* Freeze layout scrolling on user hover interaction */
+.hero:hover .hero__gallery-track {
+  animation-play-state: play;
+}
+
+.hero__pill-frame {
+  width: 100%;
+  height: 340px;
+  border-radius: 100px; /* Distinctive clean vertical oval pill cuts */
+  overflow: hidden;
+}
+
+.hero__pill-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --- Right Side Column: Enquire Form Card (Takes up 1 share) --- */
+.hero__form-wrapper {
+  display: flex;
+  justify-content: flex-end; /* Keeps form pinned flush to the right boundary edge */
+}
+
+.enquire-card {
+  width: 100%;
+  max-width: 360px; /* Standard design card proportion */
+  background-color: rgba(30, 8, 54, 0.5); /* Clear translucent dark overlay */
+  border-radius: 16px;
+  padding: 1.5rem 1rem;
+  height: auto;
+}
+
+.enquire-card__title {
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--color-text-light);
+  margin-bottom: 0.5rem;
+}
+
+.enquire-card__field {
+  margin-bottom: 1rem;
+}
+
+.enquire-card__field input {
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 0.75rem 1.25rem;
+  border-radius: 8px;
+  color: var(--color-text-light);
+  font-size: 0.95rem;
+  outline: none;
+  transition: var(--transition-smooth);
+}
+
+.enquire-card__field input::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.enquire-card__field input:focus {
+  background-color: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.enquire-card__submit {
+  width: 100%;
+  background-color: transparent;
+  border: 2px solid var(--color-text-light);
+  color: var(--color-text-light);
+  padding: 0.9rem;
+  border-radius: 4px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+}
+
+.enquire-card__submit:hover {
+  background-color: var(--color-text-light);
+  color: #3d1466;
+}
+
+/* --- Core Keyframe Layout Engines --- */
+@keyframes loopScrollUp {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-50%); }
+}
+
+@keyframes loopScrollDown {
+  0% { transform: translateY(-50%); }
+  100% { transform: translateY(0); }
+}
+
+/* --- Responsive Adaptation Layers --- */
+@media (max-width: 1200px) {
+  .hero__container {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 0 2rem;
+  }
+  .hero { height: auto; min-height: auto; padding: 0; }
+  .hero__gallery {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    height: 260px;
+    overflow: hidden;
+    gap: 0.5rem;
+    width: 100%;
+  }
+  .hero__gallery-col {
+    height: 260px;
+    overflow: hidden;
+    mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+  }
+  .hero__pill-frame { height: 200px; }
+  .hero__capsule { align-self: center; justify-content: center; }
+  .hero__form-wrapper { justify-content: center; }
+  .enquire-card { max-width: 440px; text-align: left; }
+}
+
+/* ==========================================================================
+   5. TRUST BADGES & MANUAL INDEPENDENT SWIPE TICKERS
+   ========================================================================== */
+.trust-section {
+  padding: 4rem 0;
+  background-color: var(--color-text-light);
+}
+
+.trust-badges__container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-bottom: 4rem;
+}
+
+/* .badge-item__wreath {
+  position: relative;
+  width: 100%;
+  min-height: 160px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 2rem;
+  background-image: url('../assets/images/wreath.svg'); 
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.badge-item__text {
+  font-size: 1.1rem;
+  line-height: 1.3;
+  color: #1a053a;
+}
+
+.badge-item__text strong {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #0b2265;
+} */
+
+
+/* Container holding the badge content */
+.badge-item__wreath {
+  position: relative;
+  width: 75%;
+  min-height: 140px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  /* Add generous horizontal padding to create space for the side leaves */
+ 
+}
+
+/* Base styles for both left and right crown wings */
+.badge-item__wreath::before,
+.badge-item__wreath::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%); /* Keeps the leaves perfectly aligned vertically */
+  width: 70px;                 /* Adjust based on the actual width of your exported image parts */
+  height: 120px;               /* Adjust based on the actual height of your exported image parts */
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* Left side leaf positioning */
+.badge-item__wreath::before {
+  left: 0;
+  background-image: url('../assets/logos/left_part.png');
+}
+
+/* Right side leaf positioning */
+.badge-item__wreath::after {
+  right: 0;
+  background-image: url('../assets/logos/right_part.png');
+}
+
+/* Fine-tune the inner copy typography spacing */
+.badge-item__text {
+  font-size: 1.1rem;
+  line-height: 1.4;
+  color: #1a053a;
+  font-weight: 500;
+}
+
+.badge-item__text strong {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #0b2265;
+  display: block;
+}
+
+/* --- Swipe Containers --- */
+.schools-showcase__title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1e0b40;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.schools-showcase__scroll-container {
+  width: 100%;
+  overflow-x: auto; /* Activates natural touch-swipe mechanics */
+  overflow-y: hidden;
+  margin-bottom: 0.75rem;
+  padding: 0 2rem;
+  
+  /* Smooth gesture tracking metrics */
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch; 
+}
+
+/* Completely hides visual desktop scrollbars to keep everything looking native */
+.schools-showcase__scroll-container::-webkit-scrollbar {
+  display: none;
+}
+.schools-showcase__scroll-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.schools-showcase__row {
+  display: flex;
+  width: max-content; /* Ensures all 10 logos stretch horizontally in one row */
+  gap: 0; /* Handled directly via individual element edge cuts */
+}
+
+.logo-box {
+  width: calc((100vw - 4rem) / 6); /* Forces exactly 6 boxes to sit on screen by default on desktop */
+  min-width: 180px; /* Fallback baseline size */
+  height: 110px;
+  background-color: #ffffff;
+  border: 1px solid #eef0f6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0.75rem;
+  flex-shrink: 0;
+  scroll-snap-align: start;
+}
+
+.logo-box img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+/* --- Breakpoints for Mobile & Tablet Sizing --- */
+@media (max-width: 1024px) {
+  .trust-badges__container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+  }
+  .logo-box {
+    width: calc((100vw - 4rem) / 3); /* Automatically transitions to show 3 logos on screen */
+  }
+}
+
+@media (max-width: 576px) {
+  .trust-badges__container {
+    grid-template-columns: 1fr;
+  }
+  .logo-box {
+    width: calc((100vw - 4rem) / 2); /* Automatically transitions to show 2 logos on screen */
+  }
+}
+
+/* ==========================================================================
+   6. SCHOOL SELECTION CATEGORY CARDS
+   ========================================================================== */
+.school-selection {
+  padding: 3rem 0;
+  background-color: var(--color-text-light);
+}
+
+.school-selection__title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #1a0b40; /* Deep primary color matching header styling */
+  text-align: center;
+  margin-bottom: 2rem;
+  letter-spacing: -0.5px;
+}
+
+.school-selection .container {
+  max-width: 1400px; /* Expands the envelope to fit 4 columns gracefully */
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 2rem; /* Uniform edge boundaries */
+}
+
+/* Precise 4-part equal grid allocation */
+.school-selection__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.75rem;
+}
+
+.school-card {
+  position: relative;
+  height: 325px;
+  width: 325px;
+  border-radius: 16px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* Locks the content text block down to the lower edge */
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+}
+
+/* Image scaling wrapper frame */
+.school-card__bg-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.school-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Linear-gradient darkening mask over card images for contrast safety */
+.school-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.4) 40%, rgba(0, 0, 0, 0) 100%);
+  z-index: 2;
+  transition: var(--transition-smooth);
+}
+
+/* Typography contents layer */
+.school-card__content {
+  position: relative;
+  z-index: 3; /* Pushes text layer cleanly on top of the black background gradient */
+  padding: 1.75rem;
+  color: var(--color-text-light);
+}
+
+.school-card__title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 0.75rem;
+}
+
+.school-card__description {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  opacity: 0.85;
+}
+
+/* Gentle interactive hover enhancements */
+.school-card:hover .school-card__img {
+  transform: scale(1.06);
+}
+
+.school-card:hover::after {
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.98) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0) 100%);
+}
+
+/* --- Responsive Layout Rules for Smaller viewports --- */
+@media (max-width: 1100px) {
+  .school-selection__grid {
+    grid-template-columns: repeat(2, 1fr); /* Collapses into 2 rows of 2 on tablet viewports */
+    gap: 1.5rem;
+  }
+  .school-card {
+    height: 380px;
+  }
+}
+
+@media (max-width: 600px) {
+  .school-selection__grid {
+    grid-template-columns: 1fr; /* Stack into a clean single vertical strip on smaller mobile phones */
+    gap: 1.25rem;
+  }
+  .school-selection__title {
+    font-size: 1.75rem;
+    margin-bottom: 2rem;
+  }
+}
+
+/* ==========================================================================
+   7. PRE-SCHEDULE APPOINTMENTS SPLIT BANNER (10% MIXED OVERLAP)
+   ========================================================================== */
+.appointments-banner {
+  width: 100%;
+  background-color: #ffffff;
+  overflow: hidden;
+  height: 550px;
+}
+
+.appointments-banner__grid {
+  display: grid;
+  /* 45% Content Panel | 55% Media space container housing the image and the 10% overlap track */
+  grid-template-columns: 45% 55%;
+  min-height: 480px;
+  width: 100%;
+}
+
+/* --- Left Column Banner (45% Share) --- */
+.appointments-banner__content {
+  background-color: #efe5fc; /* Smooth solid purple/lavender hue base block */
+  display: flex;
+  align-items: center;
+  padding: 0rem 1rem 4rem 5rem;
+  z-index: 2;
+  margin-bottom: 1rem;
+}
+
+.appointments-banner__content-inner {
+  width: 100%;
+}
+
+.appointments-banner__tagline {
+  display: block;
+  font-size: 1.35rem;
+  font-style: italic;
+  font-weight: 500;
+  color: #7b2cbf; 
+  margin-bottom: 1rem;
+}
+
+.appointments-banner__title {
+  font-size: 2.85rem;
+  font-weight: 700;
+  line-height: 1.15;
+  color: #2b1055; 
+  margin-bottom: 1rem;
+  letter-spacing: -0.5px;
+}
+
+.appointments-banner__subtitle {
+  font-size: 1.35rem;
+  font-style: italic;
+  font-weight: 500;
+  color: #7b2cbf;
+  margin-bottom: 3.5rem;
+}
+
+/* --- Right Media Panel & Shared 10% Overlap Bridge --- */
+.appointments-banner__media-zone {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* The 10% Overlay: Anchored on the left edge directly over the visual photograph */
+.appointments-banner__bridge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  /* 18.18% of this 55% column equals exactly 10% of the total layout banner width */
+  width: 18.18%; 
+  height: 100%;
+  /* Fades out seamlessly from the solid left column color into complete alpha transparency */
+  background: linear-gradient(to right, #efe5fc 0%, rgba(239, 229, 252, 0.7) 40%, rgba(239, 229, 252, 0) 100%);
+  z-index: 2;
+}
+
+.appointments-banner__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  z-index: 1;
+}
+
+/* --- Custom Interactive UI Button Frame --- */
+.appointments-btn {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  background-color: transparent;
+  border: 1px solid #2b1055;
+  border-radius: 4px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.appointments-btn__icon {
+  background-color: #2b1055;
+  color: #ffffff;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.appointments-btn__text {
+  color: #2b1055;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 0 1.5rem;
+}
+
+.appointments-btn:hover {
+  background-color: #2b1055;
+}
+.appointments-btn:hover .appointments-btn__text {
+  color: #ffffff;
+}
+
+/* --- Responsive Adaptations --- */
+@media (max-width: 1024px) {
+  .appointments-banner__grid {
+    grid-template-columns: 1fr;
+  }
+  .appointments-banner__content {
+    padding: 4rem 2rem;
+    text-align: center;
+  }
+  .appointments-banner__bridge {
+    display: none; /* Safely transition off overlay mode on vertical mobile viewports */
+  }
+  .appointments-banner__media-zone {
+    height: 300px;
+  }
+}
+
+/* ==========================================================================
+   8. EXHIBITION HIGHLIGHTS CAROUSEL (EXACT MATCH STYLING)
+   ========================================================================== */
+
+
+.must-visit-section .container {
+  width: 1440px;
+  padding: 0rem 0.5rem 0rem 0.5rem;
+}
+.must-visit-section {
+  background-color: #1a053a; /* Dark signature indigo background */
+  padding: 1rem 0rem 1rem 0rem;
+  width: 100%;
+  position: relative;
+  
+  /* Creates the smooth concave arc clip path seen at the bottom layout border */
+  clip-path: ellipse(120% 100% at 50% 0%);
+}
+
+.must-visit__title {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+/* Scroll Window Box */
+.must-visit__carousel-wrapper {
+  width: 100%;
+  overflow-x: auto; /* Fallback manual touch gesture handling for mobile tracks */
+  overflow-y: hidden;
+  padding: 1rem 0;
+  scrollbar-width: none; /* Hides raw desktop scroll tracks */
+}
+
+.must-visit__carousel-wrapper::-webkit-scrollbar {
+  display: none;
+}
+
+/* Horizontal flex track managing positions */
+.must-visit__track {
+  display: flex;
+  width: max-content;
+  gap: 1.5rem;
+  padding: 0 1rem;
+  scroll-behavior: smooth;
+}
+
+/* --- Identical Card Architecture --- */
+.must-visit-card {
+  /* Strict width and layout matching your spec */
+  width: 295px; 
+  height: 340px; /* Locked identical height across all cards */
+  background-color: #d5b6eb; /* Crisp solid white background matching Figma exactly */
+  border: 1px solid #eef0f6; /* Subtle soft border accentuation */
+  border-radius: 16px;
+  padding: 2.5rem 1.75rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  flex-shrink: 0; /* Prevents browser compression of individual cards */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.must-visit-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+}
+
+.must-visit-card__icon-zone {
+  margin-bottom: 1.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.must-visit-card__icon {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+}
+
+.must-visit-card__title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1a053a; /* Signature deep purple heading accent */
+  line-height: 1.35;
+  letter-spacing: -0.2px;
+}
+
+.must-visit-card__description {
+  font-size: 0.95rem;
+  color: #5c4e75; /* Softened contrast reading tint for the text string blocks */
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+/* --- Navigation Controls Row --- */
+.must-visit__controls {
+  display: flex;
+  justify-content: center;
+  gap: 1.25rem;
+  margin-top: 4rem;
+}
+
+.carousel-btn {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1px solid #ffffff;
+  background-color: transparent;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  z-index: 5;
+}
+
+.carousel-btn:hover {
+  background-color: #ffffff;
+  color: #1a053a;
+}
+
+.carousel-btn svg {
+  width: 22px;
+  height: 22px;
+}
+
+/* Mobile responsive optimization scales */
+@media (max-width: 768px) {
+  .must-visit__title {
+    font-size: 1.85rem;
+    margin-bottom: 2.5rem;
+  }
+  .must-visit-card {
+    width: 265px;
+    height: 320px;
+    padding: 2rem 1.5rem;
+  }
+}
