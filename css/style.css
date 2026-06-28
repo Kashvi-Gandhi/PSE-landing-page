@@ -743,6 +743,7 @@ button, input {
   padding: 0rem 1rem 4rem 5rem;
   z-index: 2;
   margin-bottom: 1rem;
+  padding-bottom:10rem;
 }
 
 .appointments-banner__content-inner {
@@ -863,7 +864,7 @@ button, input {
 
 .must-visit-section .container {
   width: 1440px;
-  padding: 0rem 0.5rem 0rem 0.5rem;
+  padding: 0.5rem 0.5rem 0rem 0.5rem;
 }
 .must-visit-section {
   background-color: #1a053a; /* Dark signature indigo background */
@@ -998,5 +999,159 @@ button, input {
     width: 265px;
     height: 320px;
     padding: 2rem 1.5rem;
+  }
+}
+
+/* ==========================================================================
+   9. BRAND FOOTER ARCHITECTURE
+   ========================================================================== */
+.site-footer {
+  background-color: #2b1055; /* Solid deep indigo baseline background */
+  color: #ffffff;
+  padding: 5rem 0 0 0; /* Base pad, padding-bottom is handled by the copyright strip */
+  width: 100%;
+}
+
+.site-footer .container {
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Symmetrical grid breakdown distribution tracking your spec screenshot layout */
+.site-footer__grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr 1.5fr 1.2fr 1.2fr;
+  gap: 2rem;
+  align-items: flex-start;
+  padding-bottom: 4rem;
+}
+
+.site-footer__logo {
+  max-width: 130px;
+  height: auto;
+  object-fit: contain;
+}
+
+/* --- Block Info Items Configuration --- */
+.footer-info-block {
+  display: flex;
+  gap: 0.85rem;
+  align-items: flex-start;
+}
+
+/* Rounded icons with matching background fills */
+.footer-info-block__icon-zone {
+  width: 36px;
+  height: 36px;
+  background-color: rgba(255, 255, 255, 0.15); /* Semi-translucent layout accent box */
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  flex-shrink: 0;
+}
+
+.footer-info-block__icon-zone svg {
+  width: 18px;
+  height: 18px;
+}
+
+.footer-info-block__title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+  line-height: 1.2;
+}
+
+.footer-info-block__title--social {
+  margin-bottom: 0.85rem;
+}
+
+.footer-info-block__desc {
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.8);
+  font-weight: 400;
+}
+
+.footer-link {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-link:hover {
+  color: #ffffff;
+}
+
+/* --- Social Icon Grid Row Links --- */
+.footer-social-strip {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.social-box {
+  width: 36px;
+  height: 36px;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  text-decoration: none;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.social-box:hover {
+  background-color: #ffffff;
+  color: #2b1055;
+  transform: translateY(-2px);
+}
+
+/* --- Lower Copyright Strip Strip Line --- */
+.site-footer__bottom {
+  background-color: #ffffff; /* Contrast white base background layout bar */
+  padding: 1.25rem 0;
+  text-align: center;
+  width: 100%;
+}
+
+.copyright-text {
+  font-size: 0.85rem;
+  color: #4a4a4a; /* Muted reading contrast tint tone */
+  font-weight: 500;
+  margin: 0;
+}
+
+/* --- Mobile Viewport Breaks --- */
+@media (max-width: 1024px) {
+  .site-footer__grid {
+    grid-template-columns: repeat(2, 1fr); /* Collapse to balanced 2-column tracks on tablet viewports */
+    gap: 3rem 2rem;
+  }
+  .site-footer__col--brand {
+    grid-column: span 2;
+    text-align: center;
+  }
+  .site-footer__logo {
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .site-footer__grid {
+    grid-template-columns: 1fr; /* Fall into a clean single column list trace on mobile phones */
+    gap: 2rem;
+  }
+  .site-footer__col--brand {
+    grid-column: span 1;
+  }
+  .site-footer {
+    padding-top: 3.5rem;
   }
 }
